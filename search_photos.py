@@ -5,7 +5,7 @@ from requests_aws4auth import AWS4Auth
 
 
 REGION = 'us-east-1'
-HOST = 'search-photos-1-n6ybbsrgoa7st2wj2t53mj3oai.us-east-1.es.amazonaws.com'
+HOST = 'search-photo-vyukt4regkij3ckykfkylh7ypm.us-east-1.es.amazonaws.com'
 INDEX = 'photo'
 
 

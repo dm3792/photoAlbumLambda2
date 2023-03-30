@@ -13,7 +13,7 @@ service = 'es'
 credentials = boto3.Session().get_credentials()
 #awsauth = AWS4Auth(credentials.access_key, credentials.secret_key, region, service, session_token=credentials.token)
 
-host = 'https://search-photos-1-n6ybbsrgoa7st2wj2t53mj3oai.us-east-1.es.amazonaws.com' # the OpenSearch Service domain, e.g. https://search-mydomain.us-west-1.es.amazonaws.com
+host = 'https://search-photo-vyukt4regkij3ckykfkylh7ypm.us-east-1.es.amazonaws.com' # the OpenSearch Service domain, e.g. https://search-mydomain.us-west-1.es.amazonaws.com
 index = 'photo'
 datatype = '_doc'
 url = host + '/' + index + '/' + datatype
