@@ -71,8 +71,9 @@ def lambda_handler(event, context):
         results2 = query(q2)
 
     urls = []
-    baseurl = 'https://photos-bucket-cf-dm3792.s3.amazonaws.com/'
-    
+    #baseurl = 'https://photos-bucket-cf-dm3792.s3.amazonaws.com/'
+    baseurl = 'https://photos-bucket-cf-dm3792-cffinal.s3.amazonaws.com/'
+
     for item in results1+results2:
         urls.append(baseurl+item['objectKey'])
     
