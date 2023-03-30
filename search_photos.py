@@ -9,7 +9,7 @@ HOST = 'search-photos-cffinal-rupz65gazpwhpvrtmoyatq3hai.us-east-1.es.amazonaws.
 INDEX = 'photo'
 
 
-headers = { "Content-Type": "application/json", "Authorization":"Basic bWFzdGVyOk1EZWxhc3RpY3NlYXJjaDEj" }
+headers = { "Content-Type": "application/json", "Authorization":"Basic bWFzdGVyMTpNRGVsYXN0aWNzZWFyY2gxIw==" }
 client = boto3.client('lexv2-runtime')
 
 def query(term):
