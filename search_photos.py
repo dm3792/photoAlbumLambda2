@@ -2,6 +2,7 @@ import json
 import boto3
 from opensearchpy import OpenSearch, RequestsHttpConnection
 from requests_aws4auth import AWS4Auth
+import inflect
 
 
 REGION = 'us-east-1'
@@ -11,6 +12,15 @@ INDEX = 'photo'
 
 headers = { "Content-Type": "application/json", "Authorization":"Basic bWFzdGVyMTpNRGVsYXN0aWNzZWFyY2gxIw==" }
 client = boto3.client('lexv2-runtime')
+
+def convertToSingular(word):
+   p = inflect.engine()
+   ret = p.singular_noun(word)
+   if ret:
+       return ret
+   else:
+       return word
+
 
 def query(term):
     q = {'size': 5, 'query': {'multi_match': {'query': term}}}
@@ -55,10 +65,17 @@ def lambda_handler(event, context):
     print('printing response')
     print(response)
 
-    q1= response['sessionState']['intent']['slots']['query1']['value']['interpretedValue']
+#     q1= response['sessionState']['intent']['slots']['query1']['value']['interpretedValue']
+#     q2 = None
+#     if response['sessionState']['intent']['slots']['query2']!=None:
+#         q2= response['sessionState']['intent']['slots']['query2']['value']['interpretedValue']
+
+    q1= convertToSingular(response['sessionState']['intent']['slots']['query1']['value']['interpretedValue'])
     q2 = None
     if response['sessionState']['intent']['slots']['query2']!=None:
-        q2= response['sessionState']['intent']['slots']['query2']['value']['interpretedValue']
+        q2= convertToSingular(response['sessionState']['intent']['slots']['query2']['value']['interpretedValue'])
+
+    
     
     print(q1)
     print(q2)
