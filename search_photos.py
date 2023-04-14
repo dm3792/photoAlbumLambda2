@@ -2,7 +2,6 @@ import json
 import boto3
 from opensearchpy import OpenSearch, RequestsHttpConnection
 from requests_aws4auth import AWS4Auth
-import inflect
 
 
 REGION = 'us-east-1'
@@ -13,14 +12,28 @@ INDEX = 'photo'
 headers = { "Content-Type": "application/json", "Authorization":"Basic bWFzdGVyMTpNRGVsYXN0aWNzZWFyY2gxIw==" }
 client = boto3.client('lexv2-runtime')
 
-def convertToSingular(word):
-   p = inflect.engine()
-   ret = p.singular_noun(word)
-   if ret:
-       return ret
-   else:
-       return word
 
+PLURAL_TO_SINGULAR_SUFFIX_MAPPING = [
+    ('people', 'person'),
+    ('men', 'man'),
+    ('women', 'woman'),
+    ('menus', 'menu'),
+    ('us', 'us'),
+    ('ss', 'ss'),
+    ('is', 'is'),
+    ("'s", "'s"),
+    ('ies', 'y'),
+    ('es', 'e'),
+    ('s', '')
+]
+
+def convertToSingular(word):
+    if word is None or word=="":
+        return ""
+    for suffix,singular_suffix in PLURAL_TO_SINGULAR_SUFFIX_MAPPING:
+        if word.endswith(suffix):
+            return word[:-len(suffix)] + singular_suffix
+    return word
 
 def query(term):
     q = {'size': 5, 'query': {'multi_match': {'query': term}}}
