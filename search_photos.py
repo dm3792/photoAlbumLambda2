@@ -64,6 +64,7 @@ def get_awsauth(region, service):
 def lambda_handler(event, context):
     
     print(event)
+    print("ccbd demo")
     
     msg_from_user = event["queryStringParameters"]["q"]
     print(f"Message from frontend: {msg_from_user}")
